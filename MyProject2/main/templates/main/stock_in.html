@@ -1,0 +1,452 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block page_content %}
+<!-- ************************************************************ -->
+{% verbatim %}
+     <section id="app" class="section">
+      <div class="row">
+        <div class="col-lg-12">
+
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Нова доставка </h5>
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="card">
+                    <div class="card-body">
+                      <!-- Дата -->
+                      <div class="row mb-3 mt-3">
+                        <label class="col-sm-2 col-form-label">Дата</label>
+                        <div class="col-sm-10">
+                          <input type="date" class="form-control">
+                        </div>
+                      </div>
+                      <!-- Получател -->
+                      <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label">Доставчик:</label>
+                        <div class="col-sm-10">
+                          <textarea class="form-control" style="height: 100px"></textarea>
+                        </div>
+                      </div>
+                      <!-- Документ -->
+                      <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label">Документ/основание</label>
+                        <div class="col-sm-10">
+                          <select class="form-select" aria-label="Default select example">
+                            <option selected>Open this select menu</option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                          </select>
+                        </div>
+                      </div>
+                      <!-- Получил -->
+                      <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label">Получил:</label>
+                        <div class="col-sm-10">
+                          <input type="text" class="form-control">
+                        </div>
+                      </div>
+                      <div class="row mb-3"><hr></div>
+                      <!-- Стоки -->
+                      <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label">Артикули:</label>
+                        <div class="col-sm-10">
+                          <table class="table table-hover">
+                            <thead>
+                              <tr>
+                                <th scope="col" width="5%">#</th>
+                                <th scope="col" width="65%">Наименование</th>
+                                <th scope="col" width="10%">Количество</th>
+                                <th scope="col" width="10%">Мярка</th>
+                                <th scope="col" width="10%" style="text-align: center;">---</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <th scope="row">1</th>
+                                <td>Артикул 1</td>
+                                <td style="text-align: right;">2</td>
+                                <td>бр.</td>
+                                <td>
+                                  <button type="button" class="btn btn-danger btn-sm">
+                                    <i class="bx bx-x"></i>
+                                  </button>
+                                  <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#EditItem">
+                                    <i class="bx bx-pencil"></i>
+                                  </button>
+                                </td>
+                              </tr>
+                              <tr>
+                                <th scope="row">2</th>
+                                <td>Артикул 2</td>
+                                <td style="text-align: right;">2</td>
+                                <td>бр.</td>
+                                <td>
+                                  <button type="button" class="btn btn-danger btn-sm">
+                                    <i class="bx bx-x"></i>
+                                  </button>
+                                  <button type="button" class="btn btn-success btn-sm">
+                                    <i class="bx bx-pencil"></i>
+                                  </button>
+                                </td>
+                              </tr>
+                              <tr>
+                                <th scope="row">3</th>
+                                <td>Артикул 3</td>
+                                <td style="text-align: right;">15</td>
+                                <td>л.</td>
+                                <td>
+                                  <button type="button" class="btn btn-danger btn-sm">
+                                    <i class="bx bx-x"></i>
+                                  </button>
+                                  <button type="button" class="btn btn-success btn-sm">
+                                    <i class="bx bx-pencil"></i>
+                                  </button>
+                                </td>
+                              </tr>
+                              <tr>
+                                <th scope="row">4</th>
+                                <td>Артикул 4</td>
+                                <td style="text-align: right;">3</td>
+                                <td>м.</td>
+                                <td>
+                                  <button type="button" class="btn btn-danger btn-sm">
+                                    <i class="bx bx-x"></i>
+                                  </button>
+                                  <button type="button" class="btn btn-success btn-sm">
+                                    <i class="bx bx-pencil"></i>
+                                  </button>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#SelectItem" style="width: 250px;">
+                            Добави съществуващ
+                          </button>
+                          <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#AddItem" style="width: 250px;">
+                            Добави нов
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div><!-- End Default Card -->
+                </div>
+              </div>
+              <div class="gap-2 mt-3" style="text-align: center;">
+                <button type="button" class="btn btn-success btn-lg">Запиши</button>
+              </div>
+
+              <!-- Добавяне на съществуващ артикул -->
+              <div class="modal fade" id="SelectItem" tabindex="-1">
+                <div class="modal-dialog modal-dialog-scrollable  modal-xl ">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Добавяне на съществуващ артикул</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="card">
+                        <div class="card-body">
+                          <h5 class="card-title">СКЛАД:</h5>
+                          <div class="row mb-3">
+                            <label class="col-sm-2 col-form-label"></label>
+                            <div class="col-sm-10">
+                              <select class="form-select" aria-label="Default select example">
+                                <option selected>Open this select menu</option>
+                                <option value="1">One</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>
+                              </select>
+                            </div>
+                          </div>
+
+                          <!-- Table with stripped rows -->
+                          <h5 class="card-title">НАЛИЧНОСТ В СКЛАДА:</h5>
+                          <table class="table datatable">
+                            <thead>
+                              <tr>
+                                <th style="width:5%"><b>И</b>нв. №</th>
+                                <th style="width:70%"><b>Н</b>аименование</th>
+                                <th style="width:10%">Количество</th>
+                                <th style="width:10%">Мярка</th>
+                                <th scope="col" width="5%" style="text-align: center;">---</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td scope="row">12</td>
+                                <td>Стока 1</td>
+                                <td>25</td>
+                                <td>бр.</td>
+                                <td>
+                                  <button type="button" class="btn btn-outline-success btn-sm">
+                                    +</i>
+                                  </button>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td scope="row">12</td>
+                                <td>Стока 1</td>
+                                <td>25</td>
+                                <td>бр.</td>
+                              </tr>
+                              <tr>
+                                <td scope="row">12</td>
+                                <td>Стока 2</td>
+                                <td>25</td>
+                                <td>бр.</td>
+                              </tr>
+                              <tr>
+                                <td>12</td>
+                                <td>Стока 3</td>
+                                <td>25</td>
+                                <td>бр.</td>
+                              </tr>
+                              <tr>
+                                <td>12</td>
+                                <td>Стока 4</td>
+                                <td>25</td>
+                                <td>бр.</td>
+                              </tr>
+                              <tr>
+                                <td>12</td>
+                                <td>Стока 5</td>
+                                <td>25</td>
+                                <td>бр.</td>
+                              </tr>
+                              <tr>
+                                <td>12</td>
+                                <td>Стока 6</td>
+                                <td>25</td>
+                                <td>бр.</td>
+                              </tr>
+                              <tr>
+                                <td>12</td>
+                                <td>Стока 1</td>
+                                <td>25</td>
+                                <td>бр.</td>
+                              </tr>
+                              <tr>
+                                <td>12</td>
+                                <td>Стока 7</td>
+                                <td>25</td>
+                                <td>бр.</td>
+                              </tr>
+                              <tr>
+                                <td>12</td>
+                                <td>Стока 8</td>
+                                <td>25</td>
+                                <td>бр.</td>
+                              </tr>
+                              <tr>
+                                <td>12</td>
+                                <td>Стока 9</td>
+                                <td>25</td>
+                                <td>бр.</td>
+                              </tr>
+                              <tr>
+                                <td>12</td>
+                                <td>Стока 10</td>
+                                <td>25</td>
+                                <td>бр.</td>
+                              </tr>
+                              <tr>
+                                <td>12</td>
+                                <td>Стока 11</td>
+                                <td>25</td>
+                                <td>бр.</td>
+                              </tr>
+                              <tr>
+                                <td>12</td>
+                                <td>Стока 12</td>
+                                <td>25</td>
+                                <td>бр.</td>
+                              </tr>
+                              <tr>
+                                <td>12</td>
+                                <td>Стока 13</td>
+                                <td>25</td>
+                                <td>бр.</td>
+                              </tr>
+                              <tr>
+                                <td>12</td>
+                                <td>Стока 14</td>
+                                <td>25</td>
+                                <td>бр.</td>
+                              </tr>
+                              <tr>
+                                <td>12</td>
+                                <td>Стока 15</td>
+                                <td>25</td>
+                                <td>бр.</td>
+                              </tr>
+                              <tr>
+                                <td>12</td>
+                                <td>Стока 16</td>
+                                <td>25</td>
+                                <td>бр.</td>
+                              </tr>
+                              <tr>
+                                <td>12</td>
+                                <td>Стока 17</td>
+                                <td>25</td>
+                                <td>бр.</td>
+                              </tr>
+                              <tr>
+                                <td>12</td>
+                                <td>Стока 18</td>
+                                <td>25</td>
+                                <td>бр.</td>
+                              </tr>
+                              <tr>
+                                <td>12</td>
+                                <td>Стока 19</td>
+                                <td>25</td>
+                                <td>бр.</td>
+                              </tr>
+                              <tr>
+                                <td>12</td>
+                                <td>Стока 20</td>
+                                <td>25</td>
+                                <td>бр.</td>
+                              </tr>
+                              <tr>
+                                <td>12</td>
+                                <td>Стока 21</td>
+                                <td>25</td>
+                                <td>бр.</td>
+                              </tr>
+                              <tr>
+                                <td>12</td>
+                                <td>Стока 22</td>
+                                <td>25</td>
+                                <td>бр.</td>
+                              </tr>
+                              <tr>
+                                <td>12</td>
+                                <td>Стока 23</td>
+                                <td>25</td>
+                                <td>бр.</td>
+                              </tr>
+                              <tr>
+                                <td>12</td>
+                                <td>Стока 24</td>
+                                <td>25</td>
+                                <td>бр.</td>
+                              </tr>
+                              <tr>
+                                <td>12</td>
+                                <td>Стока 25</td>
+                                <td>25</td>
+                                <td>бр.</td>
+                              </tr>
+                              <tr>
+                                <td>12</td>
+                                <td>Стока 26</td>
+                                <td>25</td>
+                                <td>бр.</td>
+                              </tr>
+                              <tr>
+                                <td>12</td>
+                                <td>Стока 27</td>
+                                <td>25</td>
+                                <td>бр.</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                          <!-- End Table with stripped rows -->
+
+                        </div>
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Затвори</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- End Добавяне на съществуващ артикул-->
+
+              <!-- Добавяне на нов артикул -->
+              <div class="modal fade" id="AddItem" tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered modal-xl">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Добавяне на нов артикул</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label">Склад</label>
+                        <div class="col-sm-10">
+                          <select class="form-select" aria-label="Default select example">
+                            <option selected>Open this select menu</option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label">Наименование</label>
+                        <div class="col-sm-10">
+                          <input type="text" class="form-control">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Затвори</button>
+                      <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal">Запиши</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- End Добавяне на нов артикул -->
+
+              <!-- Редактиране на артикул -->
+              <div class="modal fade" id="EditItem" tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title">Промяна на количество и/или мярка</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <form class="row g-3">
+                        <div class="col-md-6">
+                          <label for="qt" class="form-label">Количество</label>
+                          <input type="number" class="form-control" id="qt" style="text-align: right;">
+                        </div>
+                        <div class="col-md-6">
+                          <label for="inputState" class="form-label">Мярка</label>
+                          <select id="inputState" class="form-select">
+                            <option selected="">Choose...</option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                          </select>
+                        </div>
+                      </form>                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Затвори</button>
+                      <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal">Запиши</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- End Редактиране на артикул-->
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+{% endverbatim %}
+<!-- ************************************************************ -->
+{% endblock %}
+
+{% block vue_files %}
+      <script src="{% static 'REST/stock.js' %}"></script>
+{% endblock %}
