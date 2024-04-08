@@ -1,6 +1,5 @@
 from django.db import models
 
-
 # СКЛАДОВЕ
 class Stock(models.Model):
     name = models.CharField('Наименование', max_length=100, default='', blank=True)

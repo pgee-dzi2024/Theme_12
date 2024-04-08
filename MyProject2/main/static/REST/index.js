@@ -1,4 +1,4 @@
-const App = {
+const App1 = {
     data() {
      return {
         operations: [],
